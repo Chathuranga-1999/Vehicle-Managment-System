@@ -1,5 +1,6 @@
 package com.vehicle_management.vehicle_service.controller;
 
+import com.vehicle_management.vehicle_service.constants.VehicleConstants;
 import com.vehicle_management.vehicle_service.exceptions.VehicleNotFoundException;
 import com.vehicle_management.vehicle_service.model.Vehicle;
 import com.vehicle_management.vehicle_service.service.VehicleService;
@@ -11,6 +12,7 @@ import java.util.List;
 
 /**
  * Controller for handling API requests related to vehicles.
+ * Provides endpoints for adding, retrieving, updating, and deleting vehicles.
  */
 @RestController
 @RequestMapping("/api/vehicles")
@@ -18,6 +20,11 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
 
+    /**
+     * Constructs a {@link VehicleController} with the given {@link VehicleService}.
+     *
+     * @param vehicleService The service used to handle vehicle-related operations.
+     */
     public VehicleController(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
     }
@@ -57,15 +64,15 @@ public class VehicleController {
      * Endpoint to delete a specific available vehicle by its ID.
      *
      * @param vehicleID The ID of the vehicle to be deleted.
-     * @return A response indicating the result of the deletion.
+     * @return A response entity containing a message about the deletion result.
      */
     @DeleteMapping("/available/delete/{vehicleID}")
     public ResponseEntity<String> deleteAvailableVehicle(@PathVariable Long vehicleID) {
         boolean isDeleted = vehicleService.deleteAvailableVehicle(vehicleID);
         if (isDeleted) {
-            return new ResponseEntity<>("Vehicle with ID " + vehicleID + " has been successfully deleted.", HttpStatus.OK);
+            return new ResponseEntity<>(String.format(VehicleConstants.VEHICLE_DELETED_SUCCESS, vehicleID), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Vehicle with ID " + vehicleID + " not found or is not available.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(String.format(VehicleConstants.VEHICLE_NOT_FOUND, vehicleID), HttpStatus.NOT_FOUND);
         }
     }
 

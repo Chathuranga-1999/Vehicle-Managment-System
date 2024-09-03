@@ -13,7 +13,7 @@ import java.util.Optional;
 
 /**
  * Implementation of the {@link VehicleService} interface.
- * Provides the business logic for managing vehicles.
+ * Provides the business logic for managing vehicles including adding, updating, and deleting vehicles.
  */
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -23,6 +23,10 @@ public class VehicleServiceImpl implements VehicleService {
 
     /**
      * {@inheritDoc}
+     * Adds a new vehicle to the repository.
+     *
+     * @param vehicle The vehicle object to be added.
+     * @return The added vehicle entity.
      */
     @Override
     public Vehicle addVehicle(Vehicle vehicle) {
@@ -31,6 +35,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     /**
      * {@inheritDoc}
+     * Retrieves a list of vehicles that are available.
+     *
+     * @return A list of vehicles with status "Available".
      */
     @Override
     public List<Vehicle> getAvailableVehicles() {
@@ -39,6 +46,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     /**
      * {@inheritDoc}
+     * Retrieves a list of vehicles that are not available.
+     *
+     * @return A list of vehicles with status "Not Available".
      */
     @Override
     public List<Vehicle> getNotAvailableVehicles() {
@@ -47,6 +57,11 @@ public class VehicleServiceImpl implements VehicleService {
 
     /**
      * {@inheritDoc}
+     * Updates an existing vehicle identified by its ID.
+     *
+     * @param vehicleID The ID of the vehicle to be updated.
+     * @param vehicle The updated vehicle object.
+     * @return The updated vehicle entity.
      * @throws VehicleNotFoundException if the vehicle is not found by its ID.
      */
     @Override
@@ -55,12 +70,16 @@ public class VehicleServiceImpl implements VehicleService {
             vehicle.setVehicleID(vehicleID);
             return vehicleRepository.save(vehicle);
         } else {
-            throw new VehicleNotFoundException("Vehicle not found with ID: " + vehicleID);
+            throw new VehicleNotFoundException(String.format(VehicleConstants.VEHICLE_NOT_FOUND_MSG, vehicleID));
         }
     }
 
     /**
      * {@inheritDoc}
+     * Deletes a vehicle that is available and identified by its ID.
+     *
+     * @param vehicleID The ID of the vehicle to be deleted.
+     * @return True if the vehicle was deleted successfully, false otherwise.
      * @throws VehicleNotFoundException if the vehicle is not found or is not available.
      */
     @Override
@@ -70,7 +89,7 @@ public class VehicleServiceImpl implements VehicleService {
             vehicleRepository.deleteById(vehicleID);
             return true;
         } else {
-            throw new VehicleNotFoundException("Vehicle not found or not available with ID: " + vehicleID);
+            throw new VehicleNotFoundException(String.format(VehicleConstants.VEHICLE_NOT_FOUND, vehicleID));
         }
     }
 }
