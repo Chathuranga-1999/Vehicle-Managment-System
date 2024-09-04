@@ -7,10 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="vehicle-service" />
-        <module name="inventory-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="inventory-service" target="17" />
       <module name="service-record-service" target="22" />
     </bytecodeTargetLevel>
   </component>
