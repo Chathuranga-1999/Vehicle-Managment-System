@@ -32,7 +32,7 @@ public class SalesServiceImpl implements SalesService {
      * @param sales The {@link Sales} object to be added.
      * @return The saved {@link Sales} object.
      */
-    @Override
+
     public Sales addSale(Sales sales) {
         return salesRepository.save(sales);
     }
@@ -45,7 +45,7 @@ public class SalesServiceImpl implements SalesService {
      *
      * @return A list of {@link Sales} objects representing sold vehicles.
      */
-    @Override
+
     public List<Sales> getSoldVehicles() {
         return salesRepository.findByVinNotNull();
     }
@@ -61,7 +61,7 @@ public class SalesServiceImpl implements SalesService {
      * @return The updated {@link Sales} object.
      * @throws SaleNotFoundException if the sale with the given ID is not found.
      */
-    @Override
+
     public Sales editSoldVehicle(Sales sales) {
         if (!salesRepository.existsById(sales.getSaleID())) {
             throw new SaleNotFoundException(SalesConstants.SALE_NOT_FOUND + sales.getSaleID());
@@ -79,7 +79,7 @@ public class SalesServiceImpl implements SalesService {
      * @param saleID The ID of the sold vehicle to be deleted.
      * @throws SaleNotFoundException if the sale with the given ID is not found.
      */
-    @Override
+
     public void deleteSoldVehicle(Long saleID) {
         if (!salesRepository.existsById(saleID)) {
             throw new SaleNotFoundException(SalesConstants.SALE_NOT_FOUND + saleID);
