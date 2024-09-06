@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+/**
+ * This class represents a service record entity in the system,
+ * containing details of services performed on vehicles.
+ */
+
 @Entity
 @Table(name = "services")
 
@@ -17,6 +22,9 @@ public class ServiceRecord {
     private String termOfService;
     private LocalDate nextServiceDate;
     private LocalDate serviceDate;
+
+
+    // Getters and setters
 
     public Long getId() {
         return id;

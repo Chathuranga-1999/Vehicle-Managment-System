@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public interface SalesRepository extends JpaRepository<Sales, Long> {
 
-
     /**
      * Finds all sales made by a specific customer.
      *
