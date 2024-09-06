@@ -75,8 +75,8 @@ public class InventoryController {
      * @return a ResponseEntity with no content.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePart(@PathVariable Long id) {
+    public ResponseEntity<?> deletePart(@PathVariable Long id) {
         inventoryService.deletePart(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Successfully Deleted");
     }
 }
